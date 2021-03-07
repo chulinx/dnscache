@@ -11,6 +11,11 @@ import (
 
 var store = make(map[string][]string)
 
+type Resolver interface {
+	LookupHosts(domain string) ([]string, error)
+	LookupOneHost(domain string) string
+}
+
 type resolverCache struct {
 	Context  context.Context
 	Resolver *net.Resolver

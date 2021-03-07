@@ -1,6 +1,6 @@
-package example
+package dnscache
 
-var resolve = dnscache.New()
+var resolve = New()
 
 func ResolverBaiduUseCache(host string) ([]string, error) {
 	ips, err := resolve.LookupHosts(host)

@@ -1,4 +1,4 @@
-package main
+package dnscache
 
 import (
 	"fmt"
@@ -10,13 +10,14 @@ const host = "www.baidu.com"
 
 var wg sync.WaitGroup
 var lock sync.RWMutex
-var hosts = [3]string{"www.baidu.com", "www.ickey.com", "gitee.com"}
+var hosts = [3]string{"www.baidu.com", "www.github.com", "gitee.com"}
 var resolveMap = map[string]string{
 	"180.101.49.11":  "www.baidu.com",
 	"180.101.49.12":  "www.baidu.com",
-	"120.132.22.195": "www.ickey.com",
+	"112.80.248.75":  "www.baidu.com",
+	"112.80.248.76": "www.baidu.com",
 	"13.229.188.59":  "www.github.com",
-	"180.97.125.228": "gitee.com",
+	"212.64.62.183": "gitee.com",
 }
 
 func TestResolverBaiduUseCache(t *testing.T) {
@@ -32,7 +33,7 @@ func TestResolverBaiduUseCache(t *testing.T) {
 				result := resolveMap[ips[0]]
 				lock.RUnlock()
 				if result != h {
-					fmt.Println(h, result)
+					fmt.Printf("H: %s=>Host: %s\n",h, result)
 					t.Error("Failed")
 				}
 			}(h)
